@@ -4,7 +4,7 @@ import re
 
 def extract_first_string(df, column_to_be_used, column_to_be_created):
     """
-    This function gets a Python Pandas dataframe and extracting the middle string from name column in the dataframe.
+    This function gets a Python Pandas dataframe and extracting the middle string from name column in the dataframe. And Replacing values in new column. 
     :param df: Dataframe to be analyze
     :param column_to_be_used: The column is to be used to extract the middle string to the new column.
     :param column_to_be_created: The column is to be created from "column_to_be_used"
@@ -70,7 +70,7 @@ def df_numeric_column_filler_with_aggregated_data(
     try:
         df_dummy = df.groupby(group_list)[column_to_be_filled].transform(
             aggregation_method
-        )  # to see age group's medians
+        )  # to see age group's aggregation_method
 
         df.loc[
             df[column_to_be_filled].isnull(), column_to_be_filled

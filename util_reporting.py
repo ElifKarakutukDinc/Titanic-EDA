@@ -56,6 +56,7 @@ def df_descriptive_statistics(df, column_list):
     except Exception as e:
         print("Error at df_descriptive_statistics function: ", str(e))
 
+## metin ve kolon açıklamarını değiştir. 
 
 def df_pivot_aggregated_statistics(
     df, column_list, to_be_calculated_column, descriptive_statistic_list
@@ -78,7 +79,7 @@ def df_pivot_aggregated_statistics(
     )
     print(df_dummy)
 
-
+# defult parametlerin açıklamalarını da ekle
 def countplot_viz(
     data,
     xcolumn,
@@ -127,7 +128,9 @@ def multiple_plot_viz(
     :param xcolumn: This column shows x axis column.
     :param xlabel: It shows name of x axis column.
     :param ylabel: It shows name of y axis column.
-    :param title_1 and title_2: These columns show name of graphs.
+    :param title_1 
+    
+    #### and title_2: These columns show name of graphs.
     :return: This function doesn't return anything.
 
     """
