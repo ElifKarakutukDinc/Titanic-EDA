@@ -57,37 +57,6 @@ def df_descriptive_statistics(df, column_list):
         print("Error at df_descriptive_statistics function: ", str(e))
 
 
-def countplot_viz(
-    data,
-    xcolumn,
-    xlabel,
-    ylabel,
-    title,
-    hue=None,
-    fontsize_label=16,
-    fontsize_title=20,
-    rotation=45,
-):
-    """
-    This function gets a Python Pandas dataframe and visualize a countplot.
-    :param df: Dataframe to be analyze
-    :param xcolumn: This column shows x axis column.
-    :param xlabel: It shows name of x axis column.
-    :param ylabel: It shows name of y axis column.
-    :param title: This column shows name of graph.
-    :return: This function doesn't return anything.
-
-    """
-    plt.figure(figsize=(12, 5))
-
-    sns.countplot(x=xcolumn, data=data, hue=hue, palette="mako")
-    plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
-    plt.ylabel(ylabel, fontsize=fontsize_label)  # Seting the ytitle and size
-    plt.title(title, fontsize=fontsize_title)
-    plt.xticks(rotation=rotation)
-    plt.show()
-
-
 def df_pivot_aggregated_statistics(
     df, column_list, to_be_calculated_column, descriptive_statistic_list
 ):
@@ -110,13 +79,21 @@ def df_pivot_aggregated_statistics(
     print(df_dummy)
 
 
-## TODO: Continue refactoring
-
-
-def multiple_plot_viz(data, column_for_sperate, column_for_calculate):
+def countplot_viz(
+    data,
+    xcolumn,
+    xlabel,
+    ylabel,
+    title,
+    hue=None,
+    fontsize_label=16,
+    fontsize_title=20,
+    rotation=45,
+    palette="mako",
+):
     """
     This function gets a Python Pandas dataframe and visualize a countplot.
-    :param df: Dataframe to be analyze
+    :param data: Dataframe to be analyze
     :param xcolumn: This column shows x axis column.
     :param xlabel: It shows name of x axis column.
     :param ylabel: It shows name of y axis column.
@@ -124,84 +101,137 @@ def multiple_plot_viz(data, column_for_sperate, column_for_calculate):
     :return: This function doesn't return anything.
 
     """
+    plt.figure(figsize=(12, 5))
+
+    sns.countplot(x=xcolumn, data=data, hue=hue, palette=palette)
+    plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
+    plt.ylabel(ylabel, fontsize=fontsize_label)  # Seting the ytitle and size
+    plt.title(title, fontsize=fontsize_title)
+    plt.xticks(rotation=rotation)
+    plt.show()
+
+
+def multiple_plot_viz(
+    data,
+    column_for_separate,
+    column_for_calculate,
+    title_1,
+    title_2,
+    edgecolor="black",
+    color_1="orange",
+    color_2="blue",
+):
+    """
+    This function gets a Python Pandas dataframe and visualize two countplots.
+    :param data: Dataframe to be analyze
+    :param xcolumn: This column shows x axis column.
+    :param xlabel: It shows name of x axis column.
+    :param ylabel: It shows name of y axis column.
+    :param title_1 and title_2: These columns show name of graphs.
+    :return: This function doesn't return anything.
+
+    """
     f, ax = plt.subplots(1, 2, figsize=(15, 5))
 
-    data[data[column_for_sperate] == 0][column_for_calculate].plot.hist(
-        ax=ax[0], bins=20, edgecolor="black", color="orange"
+    data[data[column_for_separate] == 0][column_for_calculate].plot.hist(
+        ax=ax[0], bins=20, edgecolor=edgecolor, color=color_1
     )
-    ax[0].set_title("Survived = 0")
+    ax[0].set_title(title_1)
     x1 = list(range(0, 85, 5))
     ax[0].set_xticks(x1)
 
-    data[data[column_for_sperate] == 1][column_for_calculate].plot.hist(
-        ax=ax[1], bins=20, edgecolor="black", color="blue"
+    data[data[column_for_separate] == 1][column_for_calculate].plot.hist(
+        ax=ax[1], bins=20, edgecolor=edgecolor, color=color_2
     )
-    ax[1].set_title("Survived = 1")
+    ax[1].set_title(title_2)
     x2 = list(range(0, 85, 5))
     ax[1].set_xticks(x2)
 
 
-def calculating_descriptive_statistic_for_one_column(df, column_to_be_descriptived):
+def crosstab_viz(data, index_column_1, index_column_2, aggregated_column, cmap="mako"):
     """
-    This function gets a Python Pandas dataframe and visualize basic information about the dataframe.
-    :param df: Dataframe to be analyze
-    :param column_to_be_descriptived: We calculate descriptive statistics for this column.
+    This function gets a Python Pandas dataframe and visualize a crosstab.
+    :param data: Dataframe to be analyze
+    :param index_column_1: This column works as a stpliter of pivot.
+    :param index_column_2: This column works as a stpliter of pivot.
+    :param aggregated_column: Calculation aggregation for this column.
     :return: This function doesn't return anything.
+
     """
-    print(
-        f"Min value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].min(),
-    )
-    print(
-        f"Max value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].max(),
-    )
-    print(
-        f"Median value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].median(),
-    )
-    print(
-        f"Mean value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].mean(),
-    )
-    print(
-        f"Standard Deviation value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].std(),
-    )
-    print(
-        f"Mode value of {column_to_be_descriptived}:",
-        df[column_to_be_descriptived].mode(),
-    )
-
-
-def crosstab_viz(data, index_column_1, index_column_2, aggregated_column):
     return pd.crosstab(
         [data[index_column_1], data[index_column_2]],
         data[aggregated_column],
         margins=True,
-    ).style.background_gradient(cmap="mako")
+    ).style.background_gradient(cmap=cmap)
 
 
-def factor_plot_viz(data, index_column_1, index_column_2, aggregated_column):
+def factor_plot_viz(
+    data, index_column_1, index_column_2, aggregated_column, title_factor
+):
+    """
+    This function gets a Python Pandas dataframe and visualize a factor plot.
+    :param data: Dataframe to be analyze
+    :param index_column_1: This column works as a stpliter of pivot.
+    :param index_column_2: This column works as a stpliter of pivot.
+    :param aggregated_column: Calculation aggregation for this column.
+    :param title_factor: It shows name of graph.
+    :return: This function doesn't return anything.
+
+    """
     plt.figure(figsize=(12, 5))
     sns.factorplot(aggregated_column, index_column_2, hue=index_column_1, data=data)
-    plt.title("Title is for factorplot")
+    plt.title(title_factor)
 
 
-def relationship_viz(data, index_column_1, index_column_2, aggregated_column):
-    factor_plot_viz(data, index_column_1, index_column_2, aggregated_column)
+def relationship_viz(
+    data, index_column_1, index_column_2, aggregated_column, title_factor
+):
+    """
+    This function gets a Python Pandas dataframe and concats two different graphs.
+    :param data: Dataframe to be analyze
+    :param index_column_1: This column works as a stpliter of pivot.
+    :param index_column_2: This column works as a stpliter of pivot.
+    :param aggregated_column: Calculation aggregation for this column.
+    :param title_factor: It shows name of facot plot graph.
+    :return: This function doesn't return anything.
+
+    """
+    factor_plot_viz(
+        data, index_column_1, index_column_2, aggregated_column, title_factor
+    )
     return crosstab_viz(data, index_column_1, index_column_2, aggregated_column)
 
 
-def swarmplot_viz(df, xcolumn, ycolumn, groupped_column, xlabel, ylabel, title):
+def swarmplot_viz(
+    df,
+    xcolumn,
+    ycolumn,
+    groupped_column,
+    xlabel,
+    ylabel,
+    title,
+    fontsize=15,
+    fontsize_title=17,
+    palette="mako",
+):
+    """
+    This function gets a Python Pandas dataframe and visualize two countplots.
+    :param df: Dataframe to be analyze
+    :param xcolumn: This column shows x axis column.
+    :param ycolumn: This column shows y axis column.
+    :param groupped_column: Calculation aggregation for this column.
+    :param xlabel: It shows name of x axis column.
+    :param ylabel: It shows name of y axis column.
+    :param title_1 and title_2: These columns show name of graphs.
+    :return: This function doesn't return anything.
+
+    """
     plt.figure(figsize=(15, 10))
     plt.subplot(2, 1, 2)
 
-    sns.swarmplot(x=xcolumn, y=ycolumn, data=df, hue=groupped_column, palette="mako")
-    plt.xlabel(xlabel, fontsize=15)
-    plt.ylabel(ylabel, fontsize=15)
-    plt.title(title, fontsize=17)
+    sns.swarmplot(x=xcolumn, y=ycolumn, data=df, hue=groupped_column, palette=palette)
+    plt.xlabel(xlabel, fontsize=fontsize)
+    plt.ylabel(ylabel, fontsize=fontsize)
+    plt.title(title, fontsize=fontsize_title)
 
     plt.subplots_adjust(hspace=0.5, top=0.9)
-
-    plt.show()
