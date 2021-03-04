@@ -129,9 +129,8 @@ def multiple_plot_viz(
     :param xcolumn: This column shows x axis column.
     :param xlabel: It shows name of x axis column.
     :param ylabel: It shows name of y axis column.
-    :param title_1 
-    
-    #### and title_2: These columns show name of graphs.
+    :param title_1: This column shows one of graphs' name.
+    :param title_2: This column shows one of graphs' name.
     :return: This function doesn't return anything.
 
     """
@@ -190,7 +189,7 @@ def relationship_viz(
     data, index_column_1, index_column_2, aggregated_column, title_factor
 ):
     """
-    This function gets a Python Pandas dataframe and concats two different graphs.
+    This function gets a Python Pandas dataframe and concats two different graphs that are factorplot and crosstab.
     :param data: Dataframe to be analyze
     :param index_column_1: This column works as a stpliter of pivot.
     :param index_column_2: This column works as a stpliter of pivot.
@@ -218,7 +217,7 @@ def swarmplot_viz(
     palette="mako",
 ):
     """
-    This function gets a Python Pandas dataframe and visualize two countplots.
+    This function gets a Python Pandas dataframe and visualize a swarmplot for 2 column by a grouping column.
     :param df: Dataframe to be analyze
     :param column_list: list of columns.
     :param groupped_column: Calculation aggregation for this column.
