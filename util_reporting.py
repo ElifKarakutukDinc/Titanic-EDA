@@ -56,7 +56,6 @@ def df_descriptive_statistics(df, column_list):
     except Exception as e:
         print("Error at df_descriptive_statistics function: ", str(e))
 
-## metin ve kolon açıklamarını değiştir. 
 
 def df_pivot_aggregated_statistics(
     df, column_list, to_be_calculated_column, descriptive_statistic_list
@@ -64,11 +63,9 @@ def df_pivot_aggregated_statistics(
     """
     This function gets a Python Pandas dataframe and calculating aggregation by columns in the dataframe.
     :param df: Dataframe to be analyze
-    :param column1: For showing values by this column in group.
-    :param column2: For showing values by this column in group.
-    :param column3: For showing values by this column in group.
-    :param cal_column: Calculation aggregation for this column.
-    :param descriptive_statistic: It shows which we use descriptive statistic(Mean,Median,Standard dev,Min,etc.)
+    :param column_list: It takes a column list. 
+    :param to_be_calculated_column: Calculation aggregation for this column.
+    :param descriptive_statistic_list: It takes a list which we use descriptive statistic(Mean,Median,Standard dev,Min,etc.)
     :return: This function doesn't return anything.
 
     """
@@ -79,7 +76,7 @@ def df_pivot_aggregated_statistics(
     )
     print(df_dummy)
 
-# defult parametlerin açıklamalarını da ekle
+
 def countplot_viz(
     data,
     xcolumn,
@@ -95,10 +92,15 @@ def countplot_viz(
     """
     This function gets a Python Pandas dataframe and visualize a countplot.
     :param data: Dataframe to be analyze
-    :param xcolumn: This column shows x axis column.
-    :param xlabel: It shows name of x axis column.
-    :param ylabel: It shows name of y axis column.
-    :param title: This column shows name of graph.
+    :param xcolumn: This column designates x axis column.
+    :param xlabel: It designates name of x axis column.
+    :param ylabel: It designates name of y axis column.
+    :param title: This column designates name of graph.
+    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data. 
+    :param fontsize_label: It designates label size. 
+    :param fontsize_title: It designates title size.
+    :param rotation: It designates rotation of graph.
+    :param palette: It designates colors of graph.
     :return: This function doesn't return anything.
 
     """
@@ -126,11 +128,15 @@ def multiple_plot_viz(
     """
     This function gets a Python Pandas dataframe and visualize two countplots.
     :param data: Dataframe to be analyze
-    :param xcolumn: This column shows x axis column.
-    :param xlabel: It shows name of x axis column.
-    :param ylabel: It shows name of y axis column.
-    :param title_1: This column shows one of graphs' name.
-    :param title_2: This column shows one of graphs' name.
+    :param xcolumn: This column designates x axis column.
+    :param xlabel: It designates name of x axis column.
+    :param ylabel: It designates name of y axis column.
+    :param title_1: This column designates one of graphs' name.
+    :param title_2: This column designates one of graphs' name.
+    :param edgecolor: It designates egecolor of graphs.
+    :param color_1: It designates color of graph_1.
+    :param color_2: It designates color of graph_1.
+    :param bins: It designates size of histogram bins.
     :return: This function doesn't return anything.
 
     """
@@ -157,6 +163,7 @@ def crosstab_viz(data, index_column_1, index_column_2, aggregated_column, cmap="
     :param index_column_1: This column works as a stpliter of pivot.
     :param index_column_2: This column works as a stpliter of pivot.
     :param aggregated_column: Calculation aggregation for this column.
+    :param cmap: It designates colors of graph.
     :return: This function doesn't return anything.
 
     """
@@ -176,7 +183,7 @@ def factor_plot_viz(
     :param index_column_1: This column works as a stpliter of pivot.
     :param index_column_2: This column works as a stpliter of pivot.
     :param aggregated_column: Calculation aggregation for this column.
-    :param title_factor: It shows name of graph.
+    :param title_factor: It designates name of graph.
     :return: This function doesn't return anything.
 
     """
@@ -194,7 +201,7 @@ def relationship_viz(
     :param index_column_1: This column works as a stpliter of pivot.
     :param index_column_2: This column works as a stpliter of pivot.
     :param aggregated_column: Calculation aggregation for this column.
-    :param title_factor: It shows name of facot plot graph.
+    :param title_factor: It designates name of factorplot graph.
     :return: This function doesn't return anything.
 
     """
@@ -221,9 +228,13 @@ def swarmplot_viz(
     :param df: Dataframe to be analyze
     :param column_list: list of columns.
     :param groupped_column: Calculation aggregation for this column.
-    :param xlabel: It shows name of x axis column.
-    :param ylabel: It shows name of y axis column.
-    :param title_1 and title_2: These columns show name of graphs.
+    :param xlabel: It designates name of x axis column.
+    :param ylabel: It designates name of y axis column.
+    :param title_1: These columns designates name of graph1.
+    :param title_2: These columns designates name of graph2.
+    :param fontsize: It designates label size. 
+    :param fontsize_title: It designates title size.
+    :param palette: It designates colors of graph.
     :return: This function doesn't return anything.
 
     """
@@ -254,9 +265,14 @@ def boxplot_viz(
     This function gets a Python Pandas dataframe and visualize a countplot.
     :param data: Dataframe to be analyze
     :param xcolumn: This column shows x axis column.
-    :param xlabel: It shows name of x axis column.
-    :param ylabel: It shows name of y axis column.
-    :param title: This column shows name of graph.
+    :param xlabel: It designates name of x axis column.
+    :param ylabel: It designates name of y axis column.
+    :param title: This column designates name of graph.
+    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data. 
+    :param fontsize_label: It designates label size. 
+    :param fontsize_title: It designates title size.
+    :param rotation: It designates rotation of graph.
+    :param palette: It designates colors of graph.
     :return: This function doesn't return anything.
 
     """
@@ -286,12 +302,12 @@ def histogram_viz(
     :param data: Dataframe to be analyze
     :param column: This column is for showing data distribution. 
     :param separate_column: this colum is for creating histogram by a column's conditions.
-    :param condition_1: It shows condition of separate column.
-    :param condition_2: It shows condition of separate column.
-    :param label1: It shows label by condition_1.
-    :param label2: It shows label by condition_2.
-    :param color1: It shows color for condition_1.
-    :param color2: It shows color for condition_2.
+    :param condition_1: It designates condition of separate column.
+    :param condition_2: It designates condition of separate column.
+    :param label1: It designates label by condition_1.
+    :param label2: It designates label by condition_2.
+    :param color1: It designates color for condition_1.
+    :param color2: It designates color for condition_2.
     :return: This function doesn't return anything.
 
     """    
@@ -319,13 +335,13 @@ def distplot_viz(
     :param data: Dataframe to be analyze
     :param column: This column is for showing data distribution. 
     :param separate_column: this colum is for creating histogram by a column's conditions.
-    :param condition_1: It shows condition of separate column.
-    :param condition_2: It shows condition of separate column.
-    :param label1: It shows label by condition_1.
-    :param label2: It shows label by condition_2.
-    :param title: It shows title for graph.
-    :param color1: It shows color for condition_1.
-    :param color2: It shows color for condition_2.
+    :param condition_1: It designates condition of separate column.
+    :param condition_2: It designates condition of separate column.
+    :param label1: It designates label by condition_1.
+    :param label2: It designates label by condition_2.
+    :param title: It designates title for graph.
+    :param color1: It designates color for condition_1.
+    :param color2: It designates color for condition_2.
     :return: This function doesn't return anything.
 
     """    
