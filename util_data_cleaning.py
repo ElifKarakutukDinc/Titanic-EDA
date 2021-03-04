@@ -74,7 +74,7 @@ def df_numeric_column_filler_with_aggregated_data(
 
         df.loc[
             df[column_to_be_filled].isnull(), column_to_be_filled
-        ] = df_dummy  # to fill the rows by age group
+        ] = df_dummy  # to fill the NaN rows by df_dummy.
 
         return df
 
