@@ -111,6 +111,8 @@ def countplot_viz(
     plt.ylabel(ylabel, fontsize=fontsize_label)  # Seting the ytitle and size
     plt.title(title, fontsize=fontsize_title)
     plt.xticks(rotation=rotation)
+    if hue != None:
+        plt.legend(bbox_to_anchor=(1, 1), loc=1, borderaxespad=0)
     plt.show()
 
 
