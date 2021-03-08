@@ -4,7 +4,7 @@ import re
 
 def extract_first_string(df, column_to_be_used, column_to_be_created):
     """
-    This function gets a Python Pandas dataframe and extracting the middle string from name column in the dataframe. And Replacing values in new column. 
+    This function gets a Python Pandas dataframe and extracting the middle string from name column in the dataframe. And Replacing values in new column.
     :param df: Dataframe to be analyze
     :param column_to_be_used: The column is to be used to extract the middle string to the new column.
     :param column_to_be_created: The column is to be created from "column_to_be_used"
@@ -81,22 +81,24 @@ def df_numeric_column_filler_with_aggregated_data(
         print("Error at df_first_look function: ", str(e))
         return df
 
-    
+
 def calculating_zscore(df, cols):
     """
-    This function gets a Python Pandas dataframe and calculating z score for column list. 
+    This function gets a Python Pandas dataframe and calculating z score for column list.
     :param df: Dataframe to be analyze
-    :param cols: The column list for calculating zscore. 
+    :param cols: The column list for calculating zscore.
     :return: Returning Python Pandas dataframe.
     """
     try:
         df_dummy = df.copy()
         for col in cols:
-            col_zscore = col + '_zscore'
-            df_dummy[col_zscore] = (df_dummy[col] - df_dummy[col].mean())/df_dummy[col].std(ddof=0)
-        
+            col_zscore = col + "_zscore"
+            df_dummy[col_zscore] = (df_dummy[col] - df_dummy[col].mean()) / df_dummy[
+                col
+            ].std(ddof=0)
+
         return df_dummy
-    
+
     except Exception as e:
         print("Error at df_first_look function: ", str(e))
         return df

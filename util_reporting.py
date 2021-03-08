@@ -63,7 +63,7 @@ def df_pivot_aggregated_statistics(
     """
     This function gets a Python Pandas dataframe and calculating aggregation by columns in the dataframe.
     :param df: Dataframe to be analyze
-    :param column_list: It takes a column list. 
+    :param column_list: It takes a column list.
     :param to_be_calculated_column: Calculation aggregation for this column.
     :param descriptive_statistic_list: It takes a list which we use descriptive statistic(Mean,Median,Standard dev,Min,etc.)
     :return: This function doesn't return anything.
@@ -96,8 +96,8 @@ def countplot_viz(
     :param xlabel: It designates name of x axis column.
     :param ylabel: It designates name of y axis column.
     :param title: This column designates name of graph.
-    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data. 
-    :param fontsize_label: It designates label size. 
+    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data.
+    :param fontsize_label: It designates label size.
     :param fontsize_title: It designates title size.
     :param rotation: It designates rotation of graph.
     :param palette: It designates colors of graph.
@@ -125,7 +125,7 @@ def multiple_plot_viz(
     edgecolor="black",
     color_1="orange",
     color_2="blue",
-    bins=20
+    bins=20,
 ):
     """
     This function gets a Python Pandas dataframe and visualize two countplots.
@@ -157,6 +157,7 @@ def multiple_plot_viz(
     ax[1].set_title(title_2)
     x2 = list(range(0, 85, 5))
     ax[1].set_xticks(x2)
+
 
 def crosstab_viz(data, index_column_1, index_column_2, aggregated_column, cmap="mako"):
     """
@@ -234,7 +235,7 @@ def swarmplot_viz(
     :param ylabel: It designates name of y axis column.
     :param title_1: These columns designates name of graph1.
     :param title_2: These columns designates name of graph2.
-    :param fontsize: It designates label size. 
+    :param fontsize: It designates label size.
     :param fontsize_title: It designates title size.
     :param palette: It designates colors of graph.
     :return: This function doesn't return anything.
@@ -243,14 +244,13 @@ def swarmplot_viz(
     plt.figure(figsize=(15, 10))
     plt.subplot(2, 1, 2)
 
-    sns.swarmplot(colum_1,colum_2, data=df, hue=groupped_column, palette=palette)
+    sns.swarmplot(colum_1, colum_2, data=df, hue=groupped_column, palette=palette)
     plt.xlabel(xlabel, fontsize=fontsize)
     plt.ylabel(ylabel, fontsize=fontsize)
     plt.title(title, fontsize=fontsize_title)
 
     plt.subplots_adjust(hspace=0.5, top=0.9)
 
-    
 
 def boxplot_viz(
     data,
@@ -270,8 +270,8 @@ def boxplot_viz(
     :param xlabel: It designates name of x axis column.
     :param ylabel: It designates name of y axis column.
     :param title: This column designates name of graph.
-    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data. 
-    :param fontsize_label: It designates label size. 
+    :param hue: Name of variables in `data` or vector data, optional Inputs for plotting long-form data.
+    :param fontsize_label: It designates label size.
     :param fontsize_title: It designates title size.
     :param rotation: It designates rotation of graph.
     :param palette: It designates colors of graph.
@@ -284,10 +284,9 @@ def boxplot_viz(
     plt.xlabel(xlabel, fontsize=fontsize_label)  # seting the xtitle and size
     plt.title(title, fontsize=fontsize_title)
     plt.xticks(rotation=rotation)
-    plt.show()    
-    
+    plt.show()
 
-    
+
 def histogram_viz(
     data,
     column,
@@ -302,7 +301,7 @@ def histogram_viz(
     """
     Gets a Python Pandas dataframe and visualize histogram by a column's conditions.
     :param data: Dataframe to be analyze
-    :param column: This column is for showing data distribution. 
+    :param column: This column is for showing data distribution.
     :param separate_column: this colum is for creating histogram by a column's conditions.
     :param condition_1: It designates condition of separate column.
     :param condition_2: It designates condition of separate column.
@@ -312,13 +311,22 @@ def histogram_viz(
     :param color2: It designates color for condition_2.
     :return: This function doesn't return anything.
 
-    """    
-    plt.hist(list(data[data[separate_column] == condition_1][column]), alpha=0.5, label=label1,color=color1)
-    plt.hist(list(data[data[separate_column] == condition_2][column]), alpha=0.5, label=label2,color=color2)
+    """
+    plt.hist(
+        list(data[data[separate_column] == condition_1][column]),
+        alpha=0.5,
+        label=label1,
+        color=color1,
+    )
+    plt.hist(
+        list(data[data[separate_column] == condition_2][column]),
+        alpha=0.5,
+        label=label2,
+        color=color2,
+    )
     plt.legend(loc="upper right")
-    plt.show()   
-    
-    
+    plt.show()
+
 
 def distplot_viz(
     data,
@@ -333,9 +341,9 @@ def distplot_viz(
     color2=None,
 ):
     """
-    Gets a Python Pandas dataframe and visualize displot by a column's conditions. It shows density of column. 
+    Gets a Python Pandas dataframe and visualize displot by a column's conditions. It shows density of column.
     :param data: Dataframe to be analyze
-    :param column: This column is for showing data distribution. 
+    :param column: This column is for showing data distribution.
     :param separate_column: this colum is for creating histogram by a column's conditions.
     :param condition_1: It designates condition of separate column.
     :param condition_2: It designates condition of separate column.
@@ -346,8 +354,8 @@ def distplot_viz(
     :param color2: It designates color for condition_2.
     :return: This function doesn't return anything.
 
-    """    
-    
+    """
+
     plt.figure(figsize=(15, 5))
     sns.distplot(
         data[data[separate_column] == condition_1][column],
@@ -366,4 +374,17 @@ def distplot_viz(
     plt.title(title, fontsize=17)
     plt.xlabel(column, fontsize=15)
     plt.ylabel("Density", fontsize=15)
-    plt.legend()  
+    plt.legend()
+
+
+def correlation_chart(df, column_list):
+    """
+    This function gets a Python Pandas dataframe and list of columns to visualize correlations among those columns.
+    :param df: Dataframe to be analyze
+    :param column_list: List of columns to filter out only numeric columns to use in the fuction"
+    :return: This function doesn't return anything.
+    """
+    plt.figure(figsize=(12, 8))
+    plt.title("Correlation of Features for Data Frame")
+    sns.heatmap(df[column_list].corr(), vmax=1.0, annot=True, cmap="mako")
+    plt.show()
